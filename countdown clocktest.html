@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}
+</style>
+</head>
+<body>
+<p id="demo"></p>
+<script>
+  let now = new Date();
+  let d = new Date();
+d.setHours(6);
+d.setMinutes(0);
+d.setSeconds(0);
+let countDownDate = new Date();
+countDownDate.setHours(13);
+countDownDate.setMinutes(0);
+countDownDate.setSeconds(0);
+let e = new Date();
+e.setHours(13);
+e.setMinutes(0);
+e.setSeconds(1);
+let f=new Date();
+f.setHours(23);
+f.setMinutes(59);
+f.setSeconds(59);
+let g=new Date();
+g.setHours(0);
+g.setMinutes(0);
+g.setSeconds(0);
+let h=new Date();
+h.setHours(5);
+h.setMinutes(59);
+h.setSeconds(59);
+//mon,tue,wed,thur,fri 0.0.0 to 5.59.59
+if((now.getDay()==1||now.getDay()==2||now.getDay()==3||now.getDay()==4||now.getDay()==5)&&(now.getTime()>=g.getTime() && now.getTime()<=h.getTime()))
+  {
+    document.getElementById("demo").innerHTML = "Order now and we will send your package later today";
+}
+//mon,tue,wed,thur,fri 6.0.0 to 1.0.0
+else if((now.getDay()==1||now.getDay()==2||now.getDay()==3||now.getDay()==4||now.getDay()==5) && (now.getTime()>=d.getTime() && now.getTime()<=countDownDate.getTime()))
+{
+  let x = setInterval(function() {
+  now = new Date();
+  let distance = countDownDate - now; 
+  let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  let seconds = Math.floor((distance % (1000 * 60)) / 1000);  
+  document.getElementById("demo").innerHTML = "Order in "+ hours + "h " + minutes + "m " + seconds + "s and we will send your package today";  
+}, 1000);
+} 
+//mon,tue,wed,thur 1.0.1 to 23.59.59
+else if((now.getDay()==1||now.getDay()==2||now.getDay()==3||now.getDay()==4)&&(now.getTime()>=e.getTime() && now.getTime()<=f.getTime()))
+  {
+    document.getElementById("demo").innerHTML = "Order now and we will send your package tomorrow";
+}
+//fri 1.0.1 to 23.59.59
+else if((now.getDay()==5)&&(now.getTime()>=e.getTime() && now.getTime()<=f.getTime()))
+  {
+    document.getElementById("demo").innerHTML = "Order now and we will send your package on monday";
+}
+//sat,sun 0.0.0 to 23.59.59
+else if((now.getDay()==6||now.getDay()==0 )&&((now.getTime()>=g.getTime() && now.getTime()<=f.getTime())))
+  {
+    document.getElementById("demo").innerHTML = "Order now and we will send your package on monday";
+  }
+else{
+  document.getElementById("demo").innerHTML = "Order will be delivered";
+}
+
+</script>
+</body>
